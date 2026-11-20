@@ -7,3 +7,11 @@ Feature: Login functionality
     And user enters password
     And user clicks login button
     Then user should be logged in successfully
+
+  Scenario: Login without username
+    Given user is on saas login page
+    When user enters password
+    And user clicks login button
+    Then user should see username required error
+
+ 
