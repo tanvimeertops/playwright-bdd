@@ -35,3 +35,13 @@ def step_verify_login(context):
 def step_verify_login_without_username(context):
     error=context.page.locator('[data-test="error"]').text_content()
     assert error=="Epic sadface: Username is required"
+
+@then("user should see password required error")
+def step_verify_login_without_password(context):
+    error=context.page.locator('[data-test="error"]').text_content()
+    assert error=="Epic sadface: Password is required"
+
+@then("user should see username required error")
+def step_verify_login_without_username(context):
+    error=context.page.locator('[data-test="error"]').text_content()
+    assert error=="Epic sadface: Username is required"
