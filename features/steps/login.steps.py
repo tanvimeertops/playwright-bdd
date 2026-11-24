@@ -17,16 +17,17 @@ def step_open_login_page(context):
 
 @when("user enters username")
 def step_enter_username(context):
-    context.page.locator('[data-test="username"]').fill('standard_user')
-
+    # context.page.locator('[data-test="username"]').fill('standard_user')
+    context.page.get_by_role("textbox",name="Username").fill("standard_user")
+    
 @when("user enters password")
 def step_enter_password(context):
     context.page.locator('[data-test="password"]').fill('secret_sauce')
 
 @when("user clicks login button")
 def step_click_login(context):
-    context.page.locator('[data-test="login-button"]').click()
-    
+    # context.page.locator('[data-test="login-button"]').click()
+    context.page.get_by_role("button",name="Login").click()
 @then("user should be logged in successfully")
 def step_verify_login(context):
     assert context.page.url=="https://www.saucedemo.com/inventory.html"
@@ -43,5 +44,17 @@ def step_verify_login_without_password(context):
 
 @then("user should see username required error")
 def step_verify_login_without_username(context):
+    # error=context.page.locator('[data-test="error"]').text_content()
+    error=context.page.get_by_text("Username is required",exact=False).text_content()
+    assert error=="Epic sadface: Username is required"
+
+@then("user should see password required error")
+def step_verify_login_without_password(context):
     error=context.page.locator('[data-test="error"]').text_content()
+    assert error=="Epic sadface: Password is required"
+
+@then("user should see username required error")
+def step_verify_login_without_username(context):
+    # error=context.page.locator('[data-test="error"]').text_content()
+    error=context.page.get_by_text("Username is required",exact=False).text_content()
     assert error=="Epic sadface: Username is required"
