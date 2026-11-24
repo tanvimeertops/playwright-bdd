@@ -1,6 +1,22 @@
 from behave import given,when,then  # type: ignore[reportMissingImports]
 from playwright.sync_api import sync_playwright
 import time
+
+
+@given("I navigate to the iframe page")
+def step_navigate_iframe_page(context):
+  context.page.goto("https://practice.expandtesting.com/iframe")
+
+@when("I enter text inside the iframe")
+def step_enter_text_iframe(context):
+    context.frame=context.page.frame_locator("#mce_0_ifr")
+    context.frame.locator("#tinymce").fill("hello from tops")
+    time.sleep(5)
+
+@then("I should see the text entered")
+def step_see_text_entered(context):
+    actual_text=context.frame.locator("#tinymce").text_content()
+    assert "tops" in actual_text
 @given("I navigate to the windows page")
 def step_navigate_iframe(context):
     context.page.goto("https://practice.expandtesting.com/windows")
