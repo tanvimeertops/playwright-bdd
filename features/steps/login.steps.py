@@ -32,10 +32,7 @@ def step_click_login(context):
 def step_verify_login(context):
     assert context.page.url=="https://www.saucedemo.com/inventory.html"
 
-@then("user should see username required error")
-def step_verify_login_without_username(context):
-    error=context.page.locator('[data-test="error"]').text_content()
-    assert error=="Epic sadface: Username is required"
+
 
 @then("user should see password required error")
 def step_verify_login_without_password(context):
@@ -48,13 +45,4 @@ def step_verify_login_without_username(context):
     error=context.page.get_by_text("Username is required",exact=False).text_content()
     assert error=="Epic sadface: Username is required"
 
-@then("user should see password required error")
-def step_verify_login_without_password(context):
-    error=context.page.locator('[data-test="error"]').text_content()
-    assert error=="Epic sadface: Password is required"
 
-@then("user should see username required error")
-def step_verify_login_without_username(context):
-    # error=context.page.locator('[data-test="error"]').text_content()
-    error=context.page.get_by_text("Username is required",exact=False).text_content()
-    assert error=="Epic sadface: Username is required"
